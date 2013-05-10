@@ -31,5 +31,37 @@
          </property>
       </product>
    </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="com.example.miniscout.client.editor.Editor"
+            default="false"
+            extensions="*.json"
+            id="com.example.miniscout.client.editor"
+            name="Contacts Editor">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:org.eclipse.ui.main.menu">
+         <menu
+               label="File">
+            <command
+                  commandId="org.eclipse.ui.file.open"
+                  label="Open"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="com.example.miniscout.client.editor.OpenHandler"
+            commandId="org.eclipse.ui.file.open">
+      </handler>
+   </extension>
 
 </plugin>
