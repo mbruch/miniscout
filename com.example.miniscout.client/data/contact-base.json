@@ -1,0 +1,27 @@
+{"fields":
+  [{
+    "type":"string",
+    "name":"Firstname",
+    "value":"Max"
+  },
+  {
+    "type":"string",
+    "name":"Lastname",
+    "value":"Mustermann"
+  },
+  {
+    "type":"string",
+    "name":"Job Role",
+    "value":"Chief Architect"
+  },
+  {
+    "type":"string",
+    "name":"Company",
+    "value":"Codetrails UG"
+  },
+  {
+    "type":"string",
+    "name":"Street",
+    "value":"Am Kirschbaum 7"
+  }]
+}
