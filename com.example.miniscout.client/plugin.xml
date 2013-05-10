@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            name="RCP Perspective"
+            class="com.example.miniscout.client.Perspective"
+            id="com.example.miniscout.client.perspective">
+      </perspective>
+   </extension>
+
+   <extension
+         id="application"
+         point="org.eclipse.core.runtime.applications">
+      <application>
+         <run
+               class="com.example.miniscout.client.Application">
+         </run>
+      </application>
+   </extension>
+   <extension
+         id="miniscout"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="com.example.miniscout.client.application"
+            name="Miniscout">
+         <property
+               name="appName"
+               value="Miniscout">
+         </property>
+      </product>
+   </extension>
+
+</plugin>
