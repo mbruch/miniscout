@@ -1,65 +1,86 @@
 package com.example.miniscout.client.editor;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.net.URI;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
 
-import com.google.common.base.Throwables;
-import com.google.common.io.CharStreams;
+import com.example.miniscout.client.fields.FormField;
+import com.example.miniscout.client.fields.StringFormField;
+import com.example.miniscout.client.fields.FormField.Listener;
+import com.example.miniscout.client.fields.FormField.ValueChangedEvent;
+import com.example.miniscout.shared.Field;
+import com.example.miniscout.shared.Form;
 
-public class Editor extends EditorPart {
+public class Editor extends EditorPart implements Listener<ValueChangedEvent> {
 
-	private Text area;
-	private String content;
+  private URI input;
+  private Form form;
+  private List<FormField> fields;
+  private boolean dirty;
 
-	@Override
-	public void init(IEditorSite site, IEditorInput input)
-			throws PartInitException {
-		setSite(site);
-		setInput(input);
-		File file = ((FileEditorInput) input).getFile();
-		try {
-			content = CharStreams.toString(new FileReader(file));
-		} catch (IOException e) {
-			Throwables.propagate(e);
-		}
-	}
+  @Override
+  public void init(IEditorSite site, IEditorInput in) throws PartInitException {
+    setSite(site);
+    setInput(in);
+    this.input = ((ContactEditorInput) in).getInput();
+    form = DatabaseService.load(input);
+  }
 
-	@Override
-	public void createPartControl(Composite parent) {
-		area = new Text(parent, SWT.MULTI);
-		area.setText(content);
-	}
+  @Override
+  public void createPartControl(Composite parent) {
+    Composite container = new Composite(parent, SWT.NONE);
+    container.setLayout(new GridLayout(2, false));
+    fields = new LinkedList<FormField>();
+    for (Field field : form.fields) {
+      FormField f = new StringFormField();
+      fields.add(f);
+      f.createControls(container, field);
+      f.addListener(this);
+    }
+    parent.layout();
+  }
 
-	@Override
-	public void doSave(IProgressMonitor monitor) {
-	}
+  @Override
+  public void setFocus() {
+  }
 
-	@Override
-	public void doSaveAs() {
-	}
+  @Override
+  public boolean isDirty() {
+    return dirty;
+  }
 
-	@Override
-	public boolean isDirty() {
-		return false;
-	}
+  @Override
+  public void doSave(IProgressMonitor monitor) {
+    for (FormField f : fields) {
+      f.save();
+    }
+    DatabaseService.save(form, input);
+    dirty = false;
+    firePropertyChange(IEditorPart.PROP_DIRTY);
+  }
 
-	@Override
-	public boolean isSaveAsAllowed() {
-		return false;
-	}
+  @Override
+  public boolean isSaveAsAllowed() {
+    return false;
+  }
 
-	@Override
-	public void setFocus() {
-	}
+  @Override
+  public void doSaveAs() {
+  }
 
+  @Override
+  public void onEvent(ValueChangedEvent event) {
+    dirty = true;
+    firePropertyChange(IEditorPart.PROP_DIRTY);
+  }
 }
