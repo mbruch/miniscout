@@ -41,6 +41,7 @@
             name="Contacts Editor">
       </editor>
    </extension>
+   
    <extension
          point="org.eclipse.ui.menus">
       <menuContribution
@@ -53,6 +54,16 @@
                   label="Open"
                   style="push">
             </command>
+            <command
+                  commandId="org.eclipse.ui.file.save"
+                  label="Save"
+                  style="push">
+            </command>
+            <command
+                  commandId="org.eclipse.ui.file.exit"
+                  label="Exit"
+                  style="push">
+            </command>
          </menu>
       </menuContribution>
    </extension>
@@ -62,6 +73,5 @@
             class="com.example.miniscout.client.editor.OpenHandler"
             commandId="org.eclipse.ui.file.open">
       </handler>
-   </extension>
-
+   </extension>   
 </plugin>
