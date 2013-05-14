@@ -4,7 +4,7 @@ import java.net.URI;
 
 public interface IDatabaseService {
 
-	public Form load(URI source) throws Exception;
+  public Form load(URI source);
 
-	public void save(Form form, URI target) throws Exception;
+  public void save(Form form, URI target);
 }

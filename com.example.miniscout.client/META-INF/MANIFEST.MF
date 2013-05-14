@@ -10,3 +10,5 @@ Require-Bundle: org.eclipse.core.runtime,
  com.google.gson,
  com.example.miniscout.shared
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-Activator: com.example.miniscout.client.Activator
+Bundle-ActivationPolicy: lazy

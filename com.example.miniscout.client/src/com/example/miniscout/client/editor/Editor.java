@@ -18,8 +18,10 @@ import com.example.miniscout.client.fields.FormField;
 import com.example.miniscout.client.fields.StringFormField;
 import com.example.miniscout.client.fields.FormField.Listener;
 import com.example.miniscout.client.fields.FormField.ValueChangedEvent;
+import com.example.miniscout.client.services.Services;
 import com.example.miniscout.shared.Field;
 import com.example.miniscout.shared.Form;
+import com.example.miniscout.shared.IDatabaseService;
 
 public class Editor extends EditorPart implements Listener<ValueChangedEvent> {
 
@@ -33,7 +35,7 @@ public class Editor extends EditorPart implements Listener<ValueChangedEvent> {
     setSite(site);
     setInput(in);
     this.input = ((ContactEditorInput) in).getInput();
-    form = DatabaseService.load(input);
+    form = Services.get(IDatabaseService.class).load(input);
   }
 
   @Override
@@ -64,7 +66,7 @@ public class Editor extends EditorPart implements Listener<ValueChangedEvent> {
     for (FormField f : fields) {
       f.save();
     }
-    DatabaseService.save(form, input);
+    Services.get(IDatabaseService.class).save(form, input);
     dirty = false;
     firePropertyChange(IEditorPart.PROP_DIRTY);
   }
