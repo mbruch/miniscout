@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Contribution
+Bundle-SymbolicName: com.example.miniscout.client.extension;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: EXAMPLE
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Require-Bundle: com.example.miniscout.shared;bundle-version="1.0.0",
+ com.example.miniscout.client;bundle-version="1.0.0",
+ org.eclipse.ui

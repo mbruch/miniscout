@@ -14,8 +14,8 @@ import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
 
+import com.example.miniscout.client.fields.Fields;
 import com.example.miniscout.client.fields.FormField;
-import com.example.miniscout.client.fields.StringFormField;
 import com.example.miniscout.client.fields.FormField.Listener;
 import com.example.miniscout.client.fields.FormField.ValueChangedEvent;
 import com.example.miniscout.client.services.Services;
@@ -44,7 +44,7 @@ public class Editor extends EditorPart implements Listener<ValueChangedEvent> {
     container.setLayout(new GridLayout(2, false));
     fields = new LinkedList<FormField>();
     for (Field field : form.fields) {
-      FormField f = new StringFormField();
+      FormField f = Fields.newField(field.type);
       fields.add(f);
       f.createControls(container, field);
       f.addListener(this);

@@ -7,6 +7,7 @@ import java.net.URI;
 
 import com.example.miniscout.shared.Form;
 import com.example.miniscout.shared.IDatabaseService;
+import com.google.common.base.Throwables;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -24,9 +25,7 @@ public class LocalDatabaseService implements IDatabaseService {
       Gson b = new GsonBuilder().create();
       return b.fromJson(r, Form.class);
     } catch (Exception e) {
-      // swallowing just for simplicity of training...
-      e.printStackTrace();
-      return null;
+      throw Throwables.propagate(e);
     }
   }
 
@@ -39,8 +38,7 @@ public class LocalDatabaseService implements IDatabaseService {
       b.toJson(form, w);
       w.close();
     } catch (Exception e) {
-      // swallowing just for simplicity of training...
-      e.printStackTrace();
+      throw Throwables.propagate(e);
     }
   }
 }

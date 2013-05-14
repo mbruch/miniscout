@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension-point id="fields" name="Form Fields" schema="schema/fields.exsd"/>
    <extension
          point="org.eclipse.ui.perspectives">
       <perspective
@@ -62,6 +63,19 @@
             class="com.example.miniscout.client.editor.OpenHandler"
             commandId="org.eclipse.ui.file.open">
       </handler>
+   </extension>
+   <extension
+         point="com.example.miniscout.client.fields">
+      <Field
+            class="com.example.miniscout.client.fields.StringFormField"
+            name="String Form Field"
+            type="string">
+      </Field>
+      <Field
+            class="com.example.miniscout.client.fields.IntFormField"
+            name="Integer Form Field"
+            type="int">
+      </Field>
    </extension>
 
 </plugin>
