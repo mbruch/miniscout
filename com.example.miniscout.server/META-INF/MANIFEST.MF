@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Server
+Bundle-SymbolicName: com.example.miniscout.server
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.example.miniscout.server.Activator
+Bundle-Vendor: EXAMPLE
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy
+Import-Package: javax.servlet,
+ javax.servlet.http,
+ org.osgi.framework,
+ org.osgi.service.http,
+ org.osgi.util.tracker
